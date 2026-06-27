@@ -1,6 +1,16 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3333/api";
+const API_BASE_URL = normalizeApiBaseUrl(
+  import.meta.env.VITE_API_BASE_URL || (import.meta.env.DEV ? "http://localhost:3333/api" : "")
+);
+
+function normalizeApiBaseUrl(value) {
+  return value.replace(/\/+$/, "");
+}
 
 async function request(path, options = {}) {
+  if (!API_BASE_URL) {
+    throw new Error("Configure VITE_API_BASE_URL com a URL da API.");
+  }
+
   const response = await fetch(`${API_BASE_URL}${path}`, {
     headers: {
       "Content-Type": "application/json",
