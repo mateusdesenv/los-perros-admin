@@ -1,5 +1,6 @@
 node_modules
 dist
+dist-ssr
 .vite
 .vercel
 
@@ -8,7 +9,10 @@ dist
 .env.development.local
 .env.production.local
 
-*.log
-*.zip
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
 .DS_Store
 coverage
